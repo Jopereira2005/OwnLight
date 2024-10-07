@@ -31,3 +31,38 @@ $gray-scale: #BCBCBC;
   display: flex;
   flex-direction: column;
 }
+
+%button_login_register {
+  color: $secondary-color;
+  border: 3px solid $light-color;
+  background-color: $light-color;
+  border-radius: 10px;
+  font-size: 1.6rem;
+  font-weight: 900;
+  padding: 0.5rem 2rem;
+  cursor: pointer;
+  transition: 0.4s;
+
+
+  &:hover {
+    background-color: transparent;
+    color: $light-color;
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 236, 0.33);
+    color: $light-color;
+  }
+}
+
+%link_login_register {
+  font-size: 1rem;
+  text-decoration: underline;
+  color: $light-color;
+  cursor: pointer;
+  transition: 0.4s;
+
+  &:hover {
+    color: $gray-scale;
+  }
+}

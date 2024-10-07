@@ -1,26 +1,6 @@
 @import "../../global.scss";
 $mobile-l: 415px;
-
-%flex-column {
-  display: flex;
-  flex-direction: column;
-}
-
-%link {
-  font-size: 1rem;
-  text-decoration: underline;
-  color: $light-color;
-}
-
-%button {
-  color: $secondary-color;
-  border: 2px solid $light-color;
-  background-color: $light-color;
-  border-radius: 10px;
-  font-size: 1.6rem;
-  font-weight: 900;
-  padding: 0.5rem 2rem;
-}
+$tablet: 768px;
 
 .login {
   background-image: url(../../assets/Login_Register/background.jpg);
@@ -64,6 +44,11 @@ $mobile-l: 415px;
 
     img {
       width: 40vw;
+
+      @media screen and (min-width: $tablet) {
+        width: 30vw;
+
+      }
     }
 
     &__text {
@@ -106,13 +91,13 @@ $mobile-l: 415px;
     }
 
     &__button {
-      @extend %button;
+      @extend %button_login_register;
       margin-top: 3rem;
     }
 
     &__link {
       margin-top: 5px;
-      @extend %link;
+      @extend %link_login_register;
       text-align: start;
     }
   }
@@ -134,6 +119,7 @@ $mobile-l: 415px;
       gap: 10px;
       width: 40px;
       height: 40px;
+      cursor: pointer;  
     }
   }
 }
