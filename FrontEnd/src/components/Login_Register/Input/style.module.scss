@@ -1,0 +1,41 @@
+@import "../../../global.scss";
+
+.input_group {
+  position: relative;
+
+  input {
+    border: 0.2rem solid $light-color;
+    font-size: 1.4rem;
+    width: 200px;
+    padding: 1rem 0.5rem;
+
+    border: 0.2rem solid $light-color;
+    border-radius: 1rem;
+    outline: none;
+    color: $light-color;
+    background: transparent;
+  }
+
+  label {
+    position: absolute;
+    top: 50%;
+    left: 0.5rem;
+    padding: 0 0.4rem;
+    color: $light-color;
+    font-size: 1.4em;
+    font-weight: 100;
+    pointer-events: none;
+    transform: translateY(-50%);
+    transition: all 0.3s ease-in-out;
+  }
+
+  input:is(:focus, :valid) + label {
+    top: 0;
+    padding: 0 0.4rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: $dark-color;
+    background: $light-color;
+    border-radius: 0.5rem;
+  }
+}

@@ -5,9 +5,29 @@
   line-height: 1.5;
   font-weight: 400;
 
+  // 1 rem = 10px
+  font-size: 62.5%; 
+  
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+$primary-color: #00AAD4;
+$secondary-color: #00647D ;
+$tertiary-color: #007FFF;
+$light-color: #FFFFEC;
+$dark-color: #003D4E;
+$contrast-color: #FFFF39;
+$gray-scale: #BCBCBC;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+%flex-column {
+  display: flex;
+  flex-direction: column;
+}
