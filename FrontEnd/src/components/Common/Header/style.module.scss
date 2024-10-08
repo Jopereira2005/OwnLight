@@ -1,0 +1,35 @@
+@import "../../../global.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 30px 40px;
+  box-sizing: border-box;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    &__img {
+      height: 35px;
+    }
+
+    &__text {
+      font-size: 25px;
+      color: $light-color;
+      font-weight: 400;
+
+      span {
+        font-weight: 500;
+      }
+    }
+  }
+
+  &_profile {
+    height: 35px;
+  }
+}
