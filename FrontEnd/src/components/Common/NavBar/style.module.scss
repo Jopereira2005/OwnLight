@@ -1,0 +1,57 @@
+@import "../../../global.scss";
+
+%item {
+  @extend %flex-column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  width: 100px;
+}
+
+.container {
+  @extend %flex-center-x;
+}
+
+.navbar {
+  @extend %flex-center-y;
+  justify-content: space-between;
+  position: fixed;
+  bottom: 0;
+
+  background-color: $secondary-color;
+  width: calc(100% - 80px);
+  margin: 0px 40px 20px 40px;
+  padding: 10px 20px;
+  border-radius: 20px;
+  
+  -webkit-box-shadow: 0px 10px 10px -8px rgba(0,0,0,0.25);
+  -moz-box-shadow: 0px 10px 10px -8px rgba(0,0,0,0.25);
+  box-shadow: 0px 10px 10px -8px rgba(0,0,0,0.25);
+
+  &__item {
+    @extend %item;
+
+    .icon {
+      font-size: 40px;
+    }
+  
+    .text {
+      font-size: 1.6rem;
+    }
+  }
+
+  &__item_active {
+    @extend %item;
+    .icon {
+      color: $contrast-color !important;
+      font-size: 40px;
+    }
+  
+    .text {
+      color: $contrast-color !important;
+      font-size: 1.6rem;
+    }
+  }
+
+
+}
