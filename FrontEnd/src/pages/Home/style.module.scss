@@ -1,0 +1,71 @@
+@import "../../global.scss";
+
+.home {
+  background-color: $dark-color;
+  height: 100vh;
+  color: $light-color;
+}
+
+.main {
+  @extend %flex-column;
+  align-items: center;
+  margin: 10px 40px;
+
+  &__search {
+    display: flex;
+    width: 100%;
+    background-color: $secondary-color;
+    border-radius: 25px;
+    padding: 15px;
+
+    -webkit-box-shadow: 0px 10px 10px -8px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 10px 10px -8px rgba(0,0,0,0.25);
+    box-shadow: 0px 10px 10px -8px rgba(0,0,0,0.25);
+
+    &__search_bar {
+      @extend %flex-center-y;
+
+      &__img {
+        font-size: 2rem;
+        margin-right: 10px;
+      }
+  
+      &__input {
+        width: 100%; 
+        background-color: transparent;
+        outline: none;
+        border: none;
+
+        font-size: 1.4rem;
+
+        &::placeholder {
+          color: $gray-scale;
+        }
+      }
+    }
+  }
+
+  &__carousel {
+    @extend %flex-center-x;
+    width: 100%;
+  }
+
+  &__cards {
+    width: 100%;
+    margin-top: 10px;
+
+    &__header {
+      @extend %flex-center-y;
+      justify-content: space-between;
+
+      &__text {
+        font-size: 3.5rem;
+        font-weight: 500;
+      }
+
+      &__icon {
+        font-size: 3.5rem;
+      }
+    }
+  }
+}
