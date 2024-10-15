@@ -3,15 +3,12 @@
 .header {
   display: flex;
   justify-content: space-between;
-  padding: 30px 40px;
+  padding: 20px 30px;
   box-sizing: border-box;
   width: 100%;
-  position: fixed;
-  z-index: 10;
 
   &__logo {
-    display: flex;
-    align-items: center;
+    @extend %flex-center-y;
     gap: 5px;
 
     &__img {
@@ -29,7 +26,8 @@
     }
   }
 
-  &_profile {
-    height: 35px;
+  &__profile {
+    @extend %flex-center;
+    font-size: 40px;
   }
 }
