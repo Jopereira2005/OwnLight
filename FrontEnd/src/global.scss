@@ -82,3 +82,7 @@ $gray-scale: #BCBCBC;
     color: $gray-scale;
   }
 }
+
+.no_scroll {
+  overflow: hidden;
+}
