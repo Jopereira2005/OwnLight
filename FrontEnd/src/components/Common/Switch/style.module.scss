@@ -1,0 +1,57 @@
+@import "../../../global.scss";
+
+.switch {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 50px;
+  height: 30px;
+  border-radius: 25px;
+  cursor: pointer;
+  padding: 0 5px;
+  transition: 0.5s ease;
+  background-color: $dark-color;
+  @extend %box_shadow;
+  
+  &__text {
+    font-size: 12px;
+    font-weight: 500;
+    color: $light-color;
+    transition: 0.3s ease;
+  }
+
+  &__icon {
+    @extend %flex-center;
+    width: 19px;
+    height: 19px;
+    color: $contrast-color;
+    transition: 0.3s ease;
+    border: 2px solid $contrast-color;
+    border-radius: 50%;
+
+    svg {
+      font-size: 17px;
+      font-weight: 900;
+    }
+    
+    &__on {
+      background-color: $contrast-color;
+      color: $dark-color;
+    }
+  }
+
+  &__active {
+    .switch__icon {
+      transform: translateX(-28px);
+
+    }
+
+    .switch__text {
+      transform: translateX(27px);
+      transition: 0.3s ease;
+    }
+  }
+}
+
+
+
