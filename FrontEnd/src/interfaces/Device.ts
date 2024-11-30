@@ -9,7 +9,7 @@ export interface Device {
   id_group?: number,
   name: string,
   type?: string,
-  status?: boolean,
+  state?: boolean,
   is_dimmable?: boolean,
   brightness?: number,
   user?: User,
