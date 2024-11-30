@@ -1,0 +1,33 @@
+@import "../../../global.scss";
+
+.search {
+  display: flex;
+  width: 100%;
+  background-color: $secondary-color;
+  border-radius: 25px;
+  padding: 15px;
+
+  @extend %box_shadow;
+
+  &__search_bar {
+    @extend %flex-center-y;
+
+    &__img {
+      font-size: 2rem;
+      margin-right: 10px;
+    }
+
+    &__input {
+      width: 100%; 
+      background-color: transparent;
+      outline: none;
+      border: none;
+      color: $light-color;
+      font-size: 1.4rem;
+
+      &::placeholder {
+        color: $gray-scale;
+      }
+    }
+  }
+}
