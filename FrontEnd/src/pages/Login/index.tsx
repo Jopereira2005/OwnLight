@@ -18,12 +18,12 @@ function Login() {
           <div className={ styled.main__div }></div>
 
           <div className={ styled.main__login }>
-            <h1 className={ styled.main__login__title }>Login</h1>
+            <h1 className={ styled.main__login__title }>Email</h1>
             <div className={ styled.main__login__form }>
               <div className={ styled.main__login__form__inputs }>
                 <Input
-                  type="text"
-                  name="Nome"
+                  type="email"
+                  name="Email"
                 />
 
                 <Input

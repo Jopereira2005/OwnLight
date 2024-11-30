@@ -48,11 +48,11 @@ function Register() {
               </div>
             </div>
             
-            <button className={ styled.main__register__button }>Entrar</button>
+            <button className={ styled.main__register__button }>Cadastrar</button>
           </div>
 
           <div className={ styled.main__social_medias }>
-            <p className={ styled.main__social_medias__text }>Entrar com</p>
+            <p className={ styled.main__social_medias__text }>Cadastrar com</p>
             <div className={ styled.main__social_medias__imgs }>
               <img src={ facebook_icon } alt="facebook" className={ styled.main__social_medias__imgs } />
               <img src={ google_icon } alt="google" className={ styled.main__social_medias__imgs } />

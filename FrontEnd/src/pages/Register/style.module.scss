@@ -32,6 +32,19 @@ $tablet: 768px;
   border-radius: 20px;
   padding: 40px 20px;
   overflow-y: auto;
+
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: transparent;     
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    border-radius: 20px;       
+    border: 3px solid $dark-color;  
+  }
   
   &__welcome {
     @extend %flex-column;
