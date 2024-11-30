@@ -8,7 +8,6 @@ interface SidebarProps {
   toggleSidebar: () => void
 }
 
-
 const Sidebar = ({ isOpen, toggleSidebar}: SidebarProps) => {
   useEffect(() => {
     if (isOpen) {
