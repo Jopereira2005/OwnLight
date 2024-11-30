@@ -1,8 +1,7 @@
 @import "../../../global.scss";
 
 .switch {
-  display: flex;
-  align-items: center;
+  @extend %flex-center-y;
   justify-content: space-between;
   width: 50px;
   height: 30px;
@@ -11,6 +10,7 @@
   padding: 0 5px;
   transition: 0.5s ease;
   background-color: $dark-color;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   @extend %box_shadow;
   
   &__text {
@@ -47,7 +47,7 @@
     }
 
     .switch__text {
-      transform: translateX(27px);
+      transform: translateX(30px);
       transition: 0.3s ease;
     }
   }
