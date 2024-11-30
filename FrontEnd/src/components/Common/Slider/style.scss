@@ -14,11 +14,50 @@
     @extend %flex-center;
     font-size: 1.8rem;
     color: $gray-scale;
+    cursor: move;
+
+    span {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .create_button {
+      @extend %flex-center-y;
+      justify-content: space-between;
+      background-color: $dark-color;
+      color: $light-color;
+      border-radius: 10px;
+      padding: 0 5px;
+      width: 80px;
+      height: 30px;
+      cursor: pointer;
+      font-size: 2rem;
+      border: 2px solid $light-color;
+      font-size: 1.6rem;
+
+      transition: 0.3s ease;
+
+      &__icon {
+        font-size: 2.2rem;
+      }
+      
+      &:is(:hover, :focus) {
+        background-color:  $light-color;
+        color: $dark-color;
+        transition: 0.3s ease;
+      }
+    }
 
     &.swiper-slide-active {
       color: $light-color;
       font-size: 2rem;
       font-weight: 500;
+
+      .create_button {
+        transition: 0.3s ease;
+        border: 3px solid $light-color;
+      }
     }
   }
 

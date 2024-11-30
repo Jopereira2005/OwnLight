@@ -1,4 +1,4 @@
-import { Swiper, SwiperSlide, SwiperProps } from 'swiper/react'
+import { Swiper, SwiperProps } from 'swiper/react'
 import { Navigation, Pagination, A11y } from 'swiper/modules';
 
 import './style.scss'
@@ -6,7 +6,7 @@ import 'swiper/scss'
 import 'swiper/scss/navigation'
 import 'swiper/scss/pagination'
 
-const Slider = () => {
+const Slider = ({ children }:any) => {
   const settings: SwiperProps = {
     spaceBetween: 10,
     centeredSlides: true,
@@ -21,16 +21,7 @@ const Slider = () => {
   return (
     <div className='slider-container'>
       <Swiper modules={[Navigation, Pagination, A11y]} { ...settings }>
-        <SwiperSlide><span>Cozinha</span></SwiperSlide>
-        <SwiperSlide><span>Sala</span></SwiperSlide>
-        <SwiperSlide><span>Cozinha</span></SwiperSlide>
-        <SwiperSlide><span>Cozinha</span></SwiperSlide>
-        <SwiperSlide><span>Cozinha</span></SwiperSlide>
-        <SwiperSlide><span>Cozinha</span></SwiperSlide>
-        <SwiperSlide><span>Cozinha</span></SwiperSlide>
-        <SwiperSlide><span>Cozinha</span></SwiperSlide>
-        <SwiperSlide><span>Cozinha</span></SwiperSlide>
-        <SwiperSlide><span>Cozinha</span></SwiperSlide>
+        { children }
       </Swiper>
     </div>
   )
