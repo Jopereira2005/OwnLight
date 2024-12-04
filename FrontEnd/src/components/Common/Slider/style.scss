@@ -2,7 +2,6 @@
 
 .slider-container {
   width: 100%;
-  max-width: 300px;
   margin: auto;
 
   .swiper {
@@ -12,14 +11,36 @@
 
   .swiper-slide {
     @extend %flex-center;
-    font-size: 1.8rem;
     color: $gray-scale;
-    cursor: move;
 
-    span {
+    button {
+      font-size: 1.8rem;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
+      background-color: transparent;
+      color: $light-color;
+      border: none;
+      transition: 0.2s ease;
+
+      user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+
+      &:is(:focus, :hover) {
+        cursor: pointer;
+        background-color: $secondary-color;
+        border-radius: 10px;
+        padding: 5px;
+        transition: 0.2s ease;
+      }
+
+      &:active {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        background-color: $light-color;
+        color: $dark-color;
+        transition: 1.5s ease;
+      }
     }
 
     .create_button {
