@@ -1,0 +1,49 @@
+@import "../../../global.scss";
+
+.card {
+  max-width: 300px;
+  height: 100px;
+  background-color: $secondary-color;
+  border-radius: 20px;
+  @extend %box_shadow;
+  border: 3px solid $secondary-color;
+  transition: 0.3s;
+
+  &__container {
+    @extend %flex-column;
+    justify-content: space-between;
+    height: 70px;
+    padding: 15px;
+
+    &__div {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+
+      &__icon {
+        font-size: 35px;
+        cursor: pointer;
+        
+        &:is(:hover, :focus) {
+         color: $contrast-color;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+        }
+      }
+    }
+
+    &__name {
+      font-size: 1.6rem;
+      font-weight: 500;
+      
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+
+  &__on {
+    border: 3px solid $contrast-color;
+    transition: 0.3s;
+  }
+}
