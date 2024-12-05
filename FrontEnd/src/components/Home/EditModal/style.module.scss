@@ -9,7 +9,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 300px;
-  height: 370px;
+  height: 450px;
   border-radius: 20px;
   background-color: $secondary-color;
   color: white;
@@ -121,6 +121,49 @@
         }
       }
 
+      &__range {
+        @extend %flex-column;
+        margin-top: 15px;
+
+        label {
+          font-size: 1.5rem;
+          margin-bottom: 5px;
+          transition: 0.3s ease;
+        }
+
+        &__disable {
+          color: $gray-scale;
+          transition: 0.3s ease;
+        }
+
+        input {
+          appearance: none;
+          @extend %box_shadow;
+          height: 25px;
+          border-radius: 25px;
+          background-color: $dark-color;
+          outline: none;
+          padding: 0 5px;
+
+          &::-webkit-slider-thumb {
+            appearance: none;
+            height: 19px;
+            width: 19px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: $contrast-color;
+            transition: 0.3s ease;
+          }
+
+          &:disabled {
+            &::-webkit-slider-thumb {
+              background-color: $secondary-color;
+              transition: 0.3s ease;
+            }   
+          }
+        }
+      }
+
       &__select {
         margin-top: 15px;
 
@@ -129,22 +172,51 @@
         }
       }
     }
+    &__button_group {
+      display: flex;
+      justify-content: space-between;
 
-    &__button {
-      @extend %box_shadow;
-      height: 40px;
-      border-radius: 10px;
-      background-color: $light-color;
-      color: $secondary-color;
-      border: none;
-      font-size: 1.7rem;
-      font-weight: 700;
-      cursor: pointer;
-      transition: 0.3s ease;
-
-      &:is(:hover, :focus) {
-        background-color: $gray-scale;
+      &__button_trash {
+        @extend %flex-center;
+        @extend %box_shadow;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+        background-color: $danger-color;
+        color: $light-color;
+        border: none;
+        font-weight: 700;
+        cursor: pointer;
         transition: 0.3s ease;
+        
+        &__icon {
+          width: 25px;
+          height: 25px;
+        }
+
+        &:is(:hover, :focus) {
+          background-color: $danger-light-color;
+          transition: 0.3s ease;
+        }
+      }
+
+      &__button {
+        @extend %box_shadow;
+        height: 40px;
+        width: 180px;
+        border-radius: 10px;
+        background-color: $light-color;
+        color: $secondary-color;
+        border: none;
+        font-size: 1.7rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s ease;
+  
+        &:is(:hover, :focus) {
+          background-color: $gray-scale;
+          transition: 0.3s ease;
+        }
       }
     }
   }
