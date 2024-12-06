@@ -36,6 +36,16 @@ public class LoginCommandHandler(
 
         var accessToken = await _authService.LoginUserAsync(user);
 
-        return _messageService.CreateLoginMessage("Login efetuado com sucesso.", accessToken);
+        return _messageService.CreateLoginMessage(
+            "Login efetuado com sucesso.",
+            accessToken,
+            new
+            {
+                user.Id,
+                user.Name,
+                user.Email,
+                user.Username,
+            }
+        );
     }
 }

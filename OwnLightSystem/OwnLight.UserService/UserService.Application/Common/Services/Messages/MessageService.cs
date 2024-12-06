@@ -85,15 +85,26 @@ public class MessageService : IMessageService
         );
     }
 
-    public Message CreateLoginMessage(string message, string accessToken)
+    public Message CreateLoginMessage(string message, string accessToken, object userData)
     {
         return Message.LogedIn(
-            "Success",
+            "Login realizado com sucesso.",
             message,
-            "https://tools.ietf.org/html/rfc7231#section-6.3.1",
+            "Success",
+            StatusCodes.Status200OK.ToString(),
+            accessToken,
+            userData
+        );
+    }
+
+    public Message CreateRefreshMessage(string message, string accessToken)
+    {
+        return Message.RefreshToken(
+            "Login realizado com sucesso.",
+            message,
+            "Success",
             StatusCodes.Status200OK.ToString(),
             accessToken
         );
     }
-
 }

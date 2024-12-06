@@ -36,7 +36,7 @@ public class RefreshTokenCommandHandler(
 
         var newAccessToken = _tokenService.GenerateToken(user);
 
-        return _messageService.CreateLoginMessage(
+        return _messageService.CreateRefreshMessage(
             "Access token atualizado com sucesso.",
             newAccessToken
         );
