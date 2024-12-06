@@ -2,8 +2,8 @@
 
 .home {
   background-color: $dark-color;
-  height: 100vh;
   color: $light-color;
+  min-height: 100vh;
 }
 
 .main {
@@ -18,9 +18,7 @@
     border-radius: 25px;
     padding: 15px;
 
-    -webkit-box-shadow: 0px 10px 10px -8px rgba(0,0,0,0.25);
-    -moz-box-shadow: 0px 10px 10px -8px rgba(0,0,0,0.25);
-    box-shadow: 0px 10px 10px -8px rgba(0,0,0,0.25);
+    @extend %box_shadow;
 
     &__search_bar {
       @extend %flex-center-y;
@@ -35,7 +33,7 @@
         background-color: transparent;
         outline: none;
         border: none;
-
+        color: $light-color;
         font-size: 1.4rem;
 
         &::placeholder {
@@ -53,10 +51,13 @@
   &__cards {
     width: 100%;
     margin-top: 10px;
+    margin-bottom: 120px;
 
     &__header {
       @extend %flex-center-y;
       justify-content: space-between;
+      margin-bottom: 20px;
+
 
       &__text {
         font-size: 3.5rem;
@@ -65,7 +66,30 @@
 
       &__icon {
         font-size: 3.5rem;
+        transition: 0.3s;
+        cursor: pointer;
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+        &:hover {
+          color: $contrast-color;
+          transition: 0.3s;
+        }
       }
+    }
+
+    &__body {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(100px, 300px));
+      grid-column-gap: 10px;
+      grid-row-gap: 10px;
+      justify-content: center;
+
+    }
+
+    &__menssage {
+      font-size: 2rem;
+      font-weight: 400;
+      color: $gray-scale;
     }
   }
 }

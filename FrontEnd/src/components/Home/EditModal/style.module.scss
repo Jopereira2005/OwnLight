@@ -1,0 +1,233 @@
+@import "../../../global.scss";
+
+.modal {
+  @extend %flex-column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 300px;
+  height: 450px;
+  border-radius: 20px;
+  background-color: $secondary-color;
+  color: white;
+  transition: left 0.5s ease-in-out;
+  z-index: 20;
+
+  &__open {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &__closed {
+    left: -250px;
+  }
+
+  &__title {
+    font-size: 2.3rem;
+    font-weight: 500;
+    margin-top: 20px
+  }
+
+  &__form {
+    @extend %flex-column;
+    height: 100%;
+    width: 225px;
+    justify-content: space-between;
+    padding: 20px 0 30px 0;
+
+    &__container_input {
+      height: 50%;
+      @extend %flex-column;
+      justify-content: space-between;
+
+      &__input {
+        @extend %flex-column;
+        
+        label {
+          font-size: 1.5rem;
+          margin-bottom: 5px;
+        }
+  
+        input {
+          font-size: 1.5rem;
+          height: 36px;
+          border: 2px solid $dark-color;
+          border-radius: 10px;
+          padding: 0px 10px;
+          background-color: $dark-color;
+          color: $light-color;
+          outline: none;
+          transition: 0.05s ease;
+          @extend %box_shadow;
+          
+          &:is(:hover) {
+            border: 2px solid $contrast-color;
+            transition: 0.05s ease;
+
+          }
+  
+          &::placeholder {
+            color: $gray-scale;
+          }
+        }
+      }
+  
+      &__switch {
+        @extend %flex-center-y;
+        justify-content: space-between;
+        margin-top: 15px;
+        
+        &__text {
+          font-size: 1.5rem;
+          font-weight: 400;
+        }
+        
+        input {
+          display: none;
+        }
+  
+        input:checked ~ &__slider{
+          transform: translateX((20px));
+          background-color: $contrast-color;
+          transition: 0.3s ease;
+        }
+  
+        &__input {
+          @extend %flex-center-y;
+          position: relative;
+          width: 40px;
+          height: 25px;
+          border-radius: 25px;
+          cursor: pointer;
+          padding: 0 5px;
+          transition: 0.3s ease;
+          background-color: $dark-color;
+          -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+          @extend %box_shadow;
+          transition: 0.3s ease;
+        }
+        
+        &__slider {
+          position: relative;
+          background-color: $secondary-color;
+          width: 19px;
+          height: 19px;
+          border-radius: 50%;
+          transition: 0.3s ease;
+        }
+      }
+
+      &__range {
+        @extend %flex-column;
+        margin-top: 15px;
+
+        label {
+          font-size: 1.5rem;
+          margin-bottom: 5px;
+          transition: 0.3s ease;
+        }
+
+        &__disable {
+          color: $gray-scale;
+          transition: 0.3s ease;
+        }
+
+        input {
+          appearance: none;
+          @extend %box_shadow;
+          height: 25px;
+          border-radius: 25px;
+          background-color: $dark-color;
+          outline: none;
+          padding: 0 5px;
+
+          &::-webkit-slider-thumb {
+            appearance: none;
+            height: 19px;
+            width: 19px;
+            border-radius: 50%;
+            cursor: pointer;
+            background-color: $contrast-color;
+            transition: 0.3s ease;
+          }
+
+          &:disabled {
+            &::-webkit-slider-thumb {
+              background-color: $secondary-color;
+              transition: 0.3s ease;
+            }   
+          }
+        }
+      }
+
+      &__select {
+        margin-top: 15px;
+
+        label {
+          font-size: 1.5rem;
+        }
+      }
+    }
+    &__button_group {
+      display: flex;
+      justify-content: space-between;
+
+      &__button_trash {
+        @extend %flex-center;
+        @extend %box_shadow;
+        height: 40px;
+        width: 40px;
+        border-radius: 10px;
+        background-color: $danger-color;
+        color: $light-color;
+        border: none;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s ease;
+        
+        &__icon {
+          width: 25px;
+          height: 25px;
+        }
+
+        &:is(:hover, :focus) {
+          background-color: $danger-light-color;
+          transition: 0.3s ease;
+        }
+      }
+
+      &__button {
+        @extend %box_shadow;
+        height: 40px;
+        width: 180px;
+        border-radius: 10px;
+        background-color: $light-color;
+        color: $secondary-color;
+        border: none;
+        font-size: 1.7rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: 0.3s ease;
+  
+        &:is(:hover, :focus) {
+          background-color: $gray-scale;
+          transition: 0.3s ease;
+        }
+      }
+    }
+  }
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  z-index: 19;
+  background-color: rgba(0, 0, 0, 0.25);
+}

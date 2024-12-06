@@ -1,0 +1,78 @@
+@import "../../../global.scss";
+
+.card {
+  width: 100%;
+  min-width: 0;
+  background-color: $secondary-color;
+  border-radius: 20px;
+  box-sizing: border-box;
+  @extend %box_shadow;
+  transition: 0.3s;
+
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 70px;
+    padding: 15px;
+
+    &__div {
+      @extend %flex-column;
+      justify-content: space-between;
+      width: calc(100% - 65px);
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+
+      &__top {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+
+        &__name {
+          font-size: 1.8rem;
+          font-weight: 500;
+          width: fit-content;
+
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        &__group {
+          font-size: 1.6rem;
+          font-weight: 400;
+          color: $gray-scale;
+        }
+
+      }
+
+      &__bottom {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      
+        &__time {
+          font-size: 2.6rem;
+          font-weight: 400;
+        }
+
+        &__days {
+          font-size: 1.4rem;
+          color: $gray-scale;
+
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+      }
+    }
+  }
+
+  &__off {
+    opacity: 0.7;
+  }
+}
