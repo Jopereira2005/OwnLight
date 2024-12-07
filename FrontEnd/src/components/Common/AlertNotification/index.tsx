@@ -7,10 +7,11 @@ interface AlertNotificationProps {
   state: boolean,
   message: string, 
   timeDuration: number,
+  type: 'error' | 'success',
   handleClose: () => void
 }
 
-const AlertNotification = ({ state, message, timeDuration, handleClose}: AlertNotificationProps) => {
+const AlertNotification = ({ state, message, timeDuration, type, handleClose}: AlertNotificationProps) => {
   return (
     <Snackbar 
       anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
@@ -19,8 +20,9 @@ const AlertNotification = ({ state, message, timeDuration, handleClose}: AlertNo
       autoHideDuration={ timeDuration } 
     >    
       <Alert
+        className={ type }
+        severity={ type }
         onClose={ handleClose }
-        severity="error"
         variant="filled"
         sx={{ width: '100%' }}
       >

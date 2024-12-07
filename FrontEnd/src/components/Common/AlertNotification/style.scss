@@ -2,7 +2,6 @@
 
 div[role="alert"] {
   @extend %flex-center-y;
-  background-color: $danger-color;
   border-radius: 15px;
   padding: 10px 15px;
 
@@ -31,4 +30,12 @@ div[role="alert"] {
       height: 25px;
     }
   }
+}
+
+.success {
+  background-color: $success-color !important;
+}
+
+.error {
+  background-color: $danger-color !important;
 }
