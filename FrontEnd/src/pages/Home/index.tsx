@@ -12,6 +12,8 @@ import CreateModal from '../../components/Home/CreateModal'
 import CreateRoomModal from '../../components/Home/CreateRoomModal'
 import EditModal from '../../components/Home/EditModal'
 import EditRoomModal from '../../components/Home/EditRoomModal'
+import AlertNotification from '../../components/Common/AlertNotification'
+
 
 
 import { Room } from '../../interfaces/Room'
@@ -68,6 +70,9 @@ function Home() {
   ]
 
   const [pressTimer, setPressTimer] = useState<NodeJS.Timeout | null>(null);
+  const [alertProps, setAlertProps] = useState({ message: '', timeDuration: 0, type: 'success' as 'error' | 'success'});
+  const [alertOpen, setAlertOpen] = useState(false)
+
 
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false);
@@ -170,6 +175,15 @@ function Home() {
     }
   };
 
+  const toggleAlertOpen = ( timeDuration: number, message: string, type: string) => {
+    setAlertProps({
+      message: message,
+      timeDuration: timeDuration,
+      type: type as 'error' | 'success'
+    })
+    setAlertOpen(true);
+  }
+
   useEffect(() => {
     filterDevices(selectRoomData.id_room || 0, devices)
     console.log(selectRoomData);
@@ -258,6 +272,11 @@ function Home() {
         isOpen={ isEditRoomModalOpen }
         toggleEditRoomModal={ toggleEditRoomModal }
         onSubmit={ editRoom }
+      />
+      <AlertNotification
+        {...alertProps}
+        state={ alertOpen }
+        handleClose={ () => setAlertOpen(false)}
       />
     </div>
   )
