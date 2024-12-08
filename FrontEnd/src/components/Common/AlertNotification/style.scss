@@ -1,0 +1,41 @@
+@import "../../../global.scss";
+
+div[role="alert"] {
+  @extend %flex-center-y;
+  border-radius: 15px;
+  padding: 10px 15px;
+
+  .MuiAlert-icon {
+    padding: 0;
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  .MuiAlert-message {
+    padding: 0px;
+    font-size: 1.7rem;
+    width: 100%;
+  }
+
+  .MuiAlert-action {
+    margin-left: 12px;
+    padding: 0;
+    .MuiButtonBase-root {
+      padding: 0 3px 0 0;
+    }
+    svg {
+      width: 25px;
+      height: 25px;
+    }
+  }
+}
+
+.success {
+  background-color: $success-color !important;
+}
+
+.error {
+  background-color: $danger-color !important;
+}
