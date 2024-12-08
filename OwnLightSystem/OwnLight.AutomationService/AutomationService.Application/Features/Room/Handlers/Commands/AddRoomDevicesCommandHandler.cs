@@ -24,7 +24,10 @@ public class AddRoomDevicesCommandHandler(IRoomRepository roomRepository)
 
         var devices = await _roomRepository.GetRoomDevicesAsync(group.Id, cancellationToken);
 
-        if (group.DeviceIds != null && request.DeviceIds.Any(id => group.DeviceIds.Contains(id.ToString())))
+        if (
+            group.DeviceIds != null
+            && request.DeviceIds.Any(id => group.DeviceIds.Contains(id.ToString()))
+        )
             throw new InvalidOperationException("Um ou mais dispositivos já estão no grupo.");
 
         await _roomRepository.AddDevicesToRoomAsync(group.Id, request.DeviceIds, cancellationToken);
