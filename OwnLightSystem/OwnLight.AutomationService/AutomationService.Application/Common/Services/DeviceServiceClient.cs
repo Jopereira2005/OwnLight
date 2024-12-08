@@ -102,4 +102,31 @@ public class DeviceServiceClient(HttpClient httpClient) : IDeviceServiceClient
         else
             throw new InvalidOperationException("Invalid action target");
     }
+
+    public async Task<DeviceServiceResult> DeleteDevicesByRoomIdAsync(
+        Guid roomId,
+        string accessToken
+    )
+    {
+        if (string.IsNullOrEmpty(accessToken))
+            throw new UnauthorizedAccessException("JWT token ausente.");
+
+        var requestUri = $"api/Device/delete_by_room/{roomId}";
+
+        var request = new HttpRequestMessage(HttpMethod.Delete, requestUri);
+        request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue(
+            "Bearer",
+            accessToken
+        );
+
+        var response = await _httpClient.SendAsync(request);
+
+        return response.IsSuccessStatusCode
+            ? new DeviceServiceResult { IsSuccess = true }
+            : new DeviceServiceResult
+            {
+                IsSuccess = false,
+                ErrorMessage = await response.Content.ReadAsStringAsync(),
+            };
+    }
 }

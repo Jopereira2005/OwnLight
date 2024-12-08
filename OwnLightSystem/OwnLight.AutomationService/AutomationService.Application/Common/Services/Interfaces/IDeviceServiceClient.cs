@@ -6,4 +6,5 @@ namespace AutomationService.Application.Common.Services.Interfaces;
 public interface IDeviceServiceClient
 {
     Task<DeviceServiceResult> ExecuteActionAsync(Routine routine, string accessToken);
+    Task<DeviceServiceResult> DeleteDevicesByRoomIdAsync(Guid roomId, string accessToken);
 }
