@@ -26,22 +26,31 @@ public class CreateDeviceCommandHandler(
     public async Task<Guid> Handle(CreateDeviceCommand request, CancellationToken cancellationToken)
     {
         await _validator.ValidateAndThrowAsync(request, cancellationToken: cancellationToken);
-
         var userId = _httpContextAccessor.HttpContext?.Items["UserId"]?.ToString();
-
         if (string.IsNullOrEmpty(userId))
             throw new UnauthorizedAccessException("Usuário não autenticado.");
 
+        var deviceExists = await _deviceRepository.GetDevicesByUserIdAsync(
+            Guid.Parse(userId),
+            pageNumber: 1,
+            pageSize: 10,
+            cancellationToken
+        );
+        if (deviceExists.Any(d => d.Name == request.Name))
+            throw new ArgumentException($"Dispositivo com o nome '{request.Name}' já existe.");
+
         var deviceType =
-            await _deviceTypeRepository.GetDeviceTypeByNameAsync(request.DeviceType, cancellationToken)
-            ?? throw new ArgumentException($"Device type '{request.DeviceType}' not found.");
+            await _deviceTypeRepository.GetDeviceTypeByNameAsync(
+                request.DeviceType,
+                cancellationToken
+            ) ?? throw new ArgumentException($"Device type '{request.DeviceType}' not found.");
 
         var device = _mapper.Map<Entity.Device>(request);
         device.DeviceType = deviceType;
         device.UserId = Guid.Parse(userId);
         device.Status = DeviceStatus.Off;
 
-        await _deviceRepository.CreateAsync(device);
+        await _deviceRepository.CreateAsync(device, cancellationToken);
 
         return device.Id;
     }
