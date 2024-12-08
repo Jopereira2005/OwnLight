@@ -220,4 +220,14 @@ public class DeviceRepository(DataContext dataContext)
             .Take(pageSize)
             .ToListAsync(cancellationToken);
     }
+
+    async Task IDeviceRepository.DeleteByRoomIdAsync(
+        Guid roomId,
+        CancellationToken cancellationToken
+    )
+    {
+        var devices = await _dbSet.Where(d => d.RoomId == roomId).ToListAsync(cancellationToken);
+        _dbSet.RemoveRange(devices);
+        await SaveChangesAsync(cancellationToken);
+    }
 }

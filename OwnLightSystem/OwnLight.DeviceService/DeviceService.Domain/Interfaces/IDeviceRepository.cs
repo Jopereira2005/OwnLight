@@ -84,4 +84,6 @@ public interface IDeviceRepository : IRepository<Device>
         int pageSize,
         CancellationToken cancellationToken = default
     );
+
+    Task DeleteByRoomIdAsync(Guid roomId, CancellationToken cancellationToken = default);
 }

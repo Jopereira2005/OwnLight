@@ -102,6 +102,14 @@ public class DeviceController(IMediator mediator) : ControllerBase
         return NoContent();
     }
 
+    [Authorize]
+    [HttpDelete("delete_by_room/{roomId}")]
+    public async Task<IActionResult> DeleteByRoom(Guid roomId)
+    {
+        await _mediator.Send(new DeleteDevicesByRoomCommand(roomId));
+        return NoContent();
+    }
+
     [AllowAnonymous]
     [HttpGet("devices_status")]
     public async Task<ActionResult<IEnumerable<HardwareResponseDTO>>> GetHardwareStatus(
