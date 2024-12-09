@@ -27,7 +27,7 @@ function Register() {
     e.preventDefault();
 
     try {
-      const response = await userService.register({ name, username, email, password });
+      const response = await userService.register(name, username, email, password);
       if (response.statusCode >= 400) {
         throw response;
       }
@@ -108,6 +108,7 @@ function Register() {
                 </div>
 
                 <button type="submit" className={ styled.main__register__button }>Cadastrar</button>
+                <a href="#" onClick={() => navigate("/login")} className={ styled.main__register__link }>Entrar</a>
               </form>
             </div>
 

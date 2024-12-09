@@ -72,13 +72,32 @@
       border-radius: 10px;
       cursor: pointer;
 
-      &__name {
-        font-size: 1.5rem;
-        width: calc(100% - 60px);
-
+      &__text {
+        @extend %flex-center-y;
+        gap: 5px;
         text-overflow: ellipsis;
         overflow: hidden;
         white-space: nowrap;
+        width: calc(100% - 20px);
+
+        &__name {
+          font-size: 1.5rem;
+          width: fit-content;
+
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+        }
+
+        &__room {
+          font-size: 1.3rem;
+          color: $gray-scale;
+        }
+
+      }
+
+      &__btn {
+        z-index: 16;
       }
     }
 

@@ -1,6 +1,7 @@
 import React, { createContext, useState, useContext } from 'react';
-import { api, forLogin } from '../services/server';
+import { forLogin } from '../services/server';
 import { User } from '../interfaces/User';
+import { useNavigate } from 'react-router-dom';
 
 interface AuthContextType {
   user: User | null;
@@ -13,28 +14,31 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | null>(() => {
+    const storedUser = localStorage.getItem('user');
+    return storedUser ? JSON.parse(storedUser) : null;
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const login = async (credentials: { username: string; password: string }) => {
     setLoading(true);
     setError(null);
     try {
-      const response = await forLogin.post('/Auth/login', credentials);
+      const response: any = await forLogin.post('/Auth/login', credentials);
 
       if(response.status != 200)
         throw response
       
-      console.log(response);
       const accessToken = (response.data as { accessToken: string }).accessToken;
 
       localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('accessToken', accessToken);
-      // localStorage.setItem('user_id', user_data.data.id);
-      // localStorage.setItem('user', JSON.stringify(user_data.data));
+      localStorage.setItem('user_id', response.data.userData.id);
+      localStorage.setItem('user', JSON.stringify(response.data.userData));
+      setUser(response.data.userData);
 
-      console.log(user);
       return response
     } catch (err: any) {
       setError(err.response.data.content);
@@ -50,6 +54,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('user');
     setUser(null);
+    navigate('/login');
   };
 
   return (

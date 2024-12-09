@@ -14,11 +14,11 @@ interface EditModalProps {
   rooms: Room[],
   isOpen: boolean,
   toggleEditModal: () => void,
-  deleteDeviceFunc: ( id: string ) => Promise<void>,
+  deleteRoutineFunc: ( id: string ) => Promise<void>,
   onSubmit: (dados: FormData, id: string) => void,
 }
 
-const EditModal = ({ device, rooms, isOpen, toggleEditModal, deleteDeviceFunc, onSubmit }: EditModalProps) => {
+const EditModal = ({ device, rooms, isOpen, toggleEditModal, deleteRoutineFunc, onSubmit }: EditModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("no_scroll");
@@ -58,7 +58,7 @@ const EditModal = ({ device, rooms, isOpen, toggleEditModal, deleteDeviceFunc, o
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     if (device.id) {
-      deleteDeviceFunc(device.id);
+      deleteRoutineFunc(device.id);
     }
     toggleEditModal();
   }

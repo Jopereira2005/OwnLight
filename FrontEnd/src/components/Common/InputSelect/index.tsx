@@ -4,9 +4,9 @@ interface selectProp {
   id: string,
   name: string,
   placeholder?: string,
-  inputValue: { value: number; label: string } | null; // Valor compatível com o `react-select`
-  options: { value: number; label: string }[]; // Array de opções
-  onChangeFunc: (newValue: { value: number; label: string } | null, actionMeta: any) => void,
+  inputValue: { value: string; label: string } | null; // Valor compatível com o `react-select`
+  options: { value: string; label: string }[]; // Array de opções
+  onChangeFunc: (newValue: { value: string; label: string } | null, actionMeta: any) => void,
   required?: boolean | undefined
 }
 
@@ -42,7 +42,7 @@ const InputSelect = ({ id, options, name, placeholder, inputValue, onChangeFunc}
       options={ options } 
       value={ inputValue }
       placeholder={ placeholder } 
-      onChange={ (newValue, actionMeta) => onChangeFunc(newValue as { value: number; label: string } | null, actionMeta) }
+      onChange={ (newValue, actionMeta) => onChangeFunc(newValue as { value: string; label: string } | null, actionMeta) }
       styles={ inputStyles }
       required
       theme={(theme : any) => ({

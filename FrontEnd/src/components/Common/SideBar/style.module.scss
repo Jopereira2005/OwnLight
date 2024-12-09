@@ -6,7 +6,7 @@
   position: fixed;
   top: 0;
   right: -450px;
-  width: 200px;
+  width: 230px;
   height: calc(100% - 84px - 50px);
   margin: 20px 20px 10px 0;
   border-radius: 20px;
@@ -26,6 +26,7 @@
   &__container {
     @extend %flex-column;
     align-items: center;
+    justify-content: space-between;
     width: calc(100% - 40px);
     height: calc(100% - 40px);   
     margin: 20px;
@@ -36,12 +37,42 @@
       gap: 15px;
 
       &__img {
-        height: 125px;
+        height: 175px;
+      }
+
+      &__menssage {
+        text-align: center;
+        font-size: 2.3rem;
+        font-weight: 400;
       }
 
       &__text {
+        text-align: center;
         font-size: 2.5rem;
-        font-weight: 400;
+        font-weight: 500;
+      }
+    }
+
+    &__button {
+      @extend %flex-center-y;
+      @extend %box_shadow;
+      justify-content: space-between;
+      font-size: 2.7rem;
+      font-weight: 500;
+      width: 160px;
+      border: none;
+      background-color: $danger-color;
+      color: $light-color;
+      padding: 10px;
+      border-radius: 10px;
+
+      svg {
+        width: 30px;
+        height: 30px;
+      }
+
+      &:is(:hover, :focus) {
+        background-color: $danger-light-color;
       }
     }
   }

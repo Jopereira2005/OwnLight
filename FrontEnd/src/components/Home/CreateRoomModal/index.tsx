@@ -44,6 +44,7 @@ const CreateRoomModal = ({ isOpen, toggleCreateRoomModal, onSubmit }: CreateRoom
                   type="text"
                   id="name"
                   name="name"
+                  minLength={ 3 }
                   value={ name }
                   onChange={(e) => setName(e.target.value)}
                   placeholder="Digite o nome do Ambiente..."

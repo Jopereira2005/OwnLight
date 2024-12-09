@@ -10,10 +10,11 @@ interface EditRoomModalProps {
   room: Room,
   isOpen: boolean,
   toggleEditRoomModal: () => void,
-  onSubmit: (dados: FormData | number) => void,
+  deleteRoomFunc: ( id: string ) => Promise<void>,
+  onSubmit: (dados: FormData, id: string) => void,
 }
 
-const EditRoomModal = ({ room, isOpen, toggleEditRoomModal, onSubmit }: EditRoomModalProps) => {
+const EditRoomModal = ({ room, isOpen, toggleEditRoomModal, deleteRoomFunc, onSubmit }: EditRoomModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("no_scroll");
@@ -37,13 +38,15 @@ const EditRoomModal = ({ room, isOpen, toggleEditRoomModal, onSubmit }: EditRoom
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    onSubmit(formData);
+    onSubmit(formData, room.id || '');
     toggleEditRoomModal();
   }
   
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    onSubmit(room.id_room ?? 0);
+    if (room.id) {
+      deleteRoomFunc(room.id);
+    }
     toggleEditRoomModal();
   }
 
@@ -59,6 +62,7 @@ const EditRoomModal = ({ room, isOpen, toggleEditRoomModal, onSubmit }: EditRoom
                 type="text"
                 id="name"
                 name="name"
+                minLength={3}
                 value={ name }
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Digite o nome do dispositivo..."

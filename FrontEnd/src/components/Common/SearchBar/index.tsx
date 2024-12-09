@@ -6,29 +6,26 @@ import { SeachIcon } from '../../../assets/Home/Search'
 import Switch from '../../Common/Switch'
 
 import { Device } from '../../../interfaces/Device'
-
+import { Room } from '../../../interfaces/Room'
 
 interface SearchBarProps {
   list: Device[],
-  handleStateFunc: ( id_device: number, state: boolean ) => void,
+  listRoom: Room[],
   handleModalFunc: () => void,
-  sendData: ( id_device: number ) => void;
+  sendData: ( id_device: string ) => void;
 }
 
-const SearchBar = ({ list, handleStateFunc, handleModalFunc }: SearchBarProps) => {
-  const [isOn, setIsOn] = useState(false);
+const SearchBar = ({ list, listRoom, handleModalFunc, sendData}: SearchBarProps) => {
+  // const [isOn, setIsOn] = useState(false);
   const [filteredList, setFilteredList] = useState<Device[]>(list);
   const [inputValue, setInputValue] = useState('');
   
   const listaRef = useRef<HTMLDivElement | null>(null);
   
   const toggleSwitch = () => {
-    setIsOn(!isOn);
   };
 
-
   const handleClickOutside = (e: MouseEvent) => {
-    console.log("a");
     if (listaRef.current && !listaRef.current.contains(e.target as Node)) {
       setInputValue("");
     }
@@ -63,11 +60,18 @@ const SearchBar = ({ list, handleStateFunc, handleModalFunc }: SearchBarProps) =
         <ul className={ styled.search__list } >
           { filteredList.length !== 0 ? 
             filteredList.map((item) => (
-              <li key={ item.id_device } className={ styled.search__list__item }>
-                <div className={ styled.search__list__item__name }>
-                  { item.name }
+              <li key={ item.id } className={ styled.search__list__item }>
+                <div onClick={() => { item.id && sendData(item.id); handleModalFunc()}} className={ styled.search__list__item__text }>
+                  <div className={ styled.search__list__item__text__name }>
+                    { item.name } |   
+                  </div>
+                  <span className={ styled.search__list__item__text__room }>
+                    { listRoom.length != 0 ? listRoom.find((room) => room.id === item.roomId)?.name : ''}
+                  </span>
                 </div>
-                <Switch state={ item.state || false } toggleSwitch={ toggleSwitch }/>
+                <div className={ styled.search__list__item__btn }>
+                  <Switch state={ item.status != "Off" ? true : false } toggleSwitch={ toggleSwitch } />
+                </div>
               </li>
             )) :
             <span className={ styled.search__list__menssage }>Nenhum resultado encontrado</span>

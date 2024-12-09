@@ -6,30 +6,32 @@ import Switch from '../../Common/Switch'
 
 import { MoreIcon } from '../../../assets/Cards/More';
 
+import { Device } from '../../../interfaces/Device';
+
 interface CardProps {
-  id: number,
-  name: string,
-  state: boolean,
+  device: Device,
   onClickFunc: () => void
-  sendData: ( id_device: number ) => void;
+  chanceStateFunc: (id: string) => Promise<void>
+  sendData: ( id_device: string ) => void;
 }
 
-const Card = ({ id, name, state, onClickFunc, sendData}: CardProps) => {
-  const [isOn, setIsOn] = useState(state);
+const Card = ({ device, onClickFunc, chanceStateFunc, sendData}: CardProps) => {
+  const [isOn, setIsOn] = useState(device.status != 'Off');
 
   const toggleSwitch = () => {
-    setIsOn((prevState) => !prevState);
-  };
+    setIsOn(!isOn);
+    chanceStateFunc(device.id || '');
+  }
 
   return (
     <>
       <div className={ `${styled.card} ${ isOn ? styled.card__on : '' }` }>
         <div className={ styled.card__container }>
-          <div className={ styled.card__container__name }>{ name }</div>
+          <div className={ styled.card__container__name }>{ device.name }</div>
 
           <div className={ styled.card__container__div }>
-            <Switch state={ isOn } toggleSwitch={ toggleSwitch }/>
-            <MoreIcon onClick={ () => { onClickFunc(); sendData(id) }} className={ styled.card__container__div__icon }/>
+            <Switch state={ isOn } toggleSwitch={ toggleSwitch } />
+            <MoreIcon onClick={ () => { onClickFunc(); sendData(device.id || '') }} className={ styled.card__container__div__icon }/>
           </div>
         </div>
       </div>

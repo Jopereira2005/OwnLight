@@ -107,7 +107,7 @@ $tablet: 768px;
     }
 
     &__link {
-      text-align: start;
+      text-align: center;
       margin-top: 5px;
       @extend %link_login_register;
     }

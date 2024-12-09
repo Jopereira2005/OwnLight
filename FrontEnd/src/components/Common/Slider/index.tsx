@@ -9,7 +9,7 @@ import 'swiper/scss/pagination'
 
 interface SliderProps {
   children: React.ReactNode;
-  onSlideChangeFunc: (id_room: number | null) => void; // Função de callback
+  onSlideChangeFunc: (id_room: string | null) => void; // Função de callback
 }
 
 const Slider = ({ children, onSlideChangeFunc }: SliderProps) => {
@@ -23,7 +23,6 @@ const Slider = ({ children, onSlideChangeFunc }: SliderProps) => {
       clickable: true
     },
     slidesPerView: 3,
-    loop: true,
     grabCursor: true,
 
   }
@@ -31,7 +30,7 @@ const Slider = ({ children, onSlideChangeFunc }: SliderProps) => {
   const handleSlideChange = (swiper: SwiperCore) => {
     const activeSlide = swiper.slides[swiper.activeIndex];
     const activeRoom = activeSlide.getAttribute('data-id');
-    onSlideChangeFunc(Number(activeRoom));
+    onSlideChangeFunc(activeRoom);
   };
 
   return (
