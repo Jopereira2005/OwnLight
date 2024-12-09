@@ -42,7 +42,7 @@ public static class APIServiceRegistration
         {
             options.AddPolicy(
                 "CorsPolicy",
-                builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()
+                builder => builder.WithOrigins(["http://localhost:5173", "https://zibr48bmde.loclx.io"]).AllowAnyMethod().AllowAnyHeader()
             );
         });
         services.AddControllers();
