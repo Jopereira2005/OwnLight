@@ -3,6 +3,7 @@ using DeviceService.API.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAPIServices(builder.Configuration);
+builder.WebHost.UseUrls("http://0.0.0.0:5034");
 
 var app = builder.Build();
 

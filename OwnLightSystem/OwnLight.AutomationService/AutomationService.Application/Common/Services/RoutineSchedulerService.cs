@@ -1,16 +1,24 @@
 using AutomationService.Application.Common.Jobs;
 using AutomationService.Application.Common.Services.Interfaces;
 using AutomationService.Domain.Entities;
+using AutomationService.Domain.Interfaces;
+using Microsoft.Extensions.Logging;
 using Quartz;
 
 namespace AutomationService.Application.Common.Services;
 
-public class RoutineSchedulerService(ISchedulerFactory schedulerFactory) : IRoutineSchedulerService
+public class RoutineSchedulerService(
+    ISchedulerFactory schedulerFactory,
+    ILogger<RoutineSchedulerService> logger
+) : IRoutineSchedulerService
 {
     private readonly ISchedulerFactory _schedulerFactory = schedulerFactory;
+    private readonly ILogger<RoutineSchedulerService> _logger = logger;
 
     public async Task ScheduleRoutineAsync(Routine routine)
     {
+        _logger.LogInformation("Scheduling routine with ID: {RoutineId}", routine.Id);
+
         var scheduler = await _schedulerFactory.GetScheduler();
 
         var job = JobBuilder
@@ -64,10 +72,13 @@ public class RoutineSchedulerService(ISchedulerFactory schedulerFactory) : IRout
         }
 
         await scheduler.ScheduleJob(job, trigger);
+        _logger.LogInformation("Scheduled routine with ID: {RoutineId}", routine.Id);
     }
 
     public async Task UpdateRoutineAsync(Routine routine)
     {
+        _logger.LogInformation("Updating routine with ID: {RoutineId}", routine.Id);
+
         var scheduler = await _schedulerFactory.GetScheduler();
 
         var jobKey = new JobKey($"RoutineJob-{routine.Id}");
@@ -124,14 +135,19 @@ public class RoutineSchedulerService(ISchedulerFactory schedulerFactory) : IRout
         }
 
         await scheduler.ScheduleJob(job, trigger);
+        _logger.LogInformation("Updated routine with ID: {RoutineId}", routine.Id);
     }
 
     public async Task DeleteRoutineAsync(Guid routineId)
     {
+        _logger.LogInformation("Deleting routine with ID: {RoutineId}", routineId);
+
         var scheduler = await _schedulerFactory.GetScheduler();
 
         var jobKey = new JobKey($"RoutineJob-{routineId}");
         await scheduler.DeleteJob(jobKey);
+
+        _logger.LogInformation("Deleted routine with ID: {RoutineId}", routineId);
     }
 
     private static string CreateCronExpressionForDays(

@@ -1,4 +1,5 @@
 using AutomationService.Application.Common.Services.Interfaces;
+using AutomationService.Application.Features.Routine.Commands;
 using AutomationService.Application.Features.Routine.Queries;
 using AutomationService.Application.Features.RoutineLog.Commands;
 using AutomationService.Domain.Enums;
@@ -10,12 +11,14 @@ namespace AutomationService.Application.Common.Jobs;
 public class RoutineJob(
     IMediator mediator,
     IUserServiceClient userServiceClient,
-    IDeviceServiceClient deviceServiceClient
+    IDeviceServiceClient deviceServiceClient,
+    IRoutineSchedulerService schedulerService
 ) : IJob
 {
     private readonly IMediator _mediator = mediator;
     private readonly IUserServiceClient _userServiceClient = userServiceClient;
     private readonly IDeviceServiceClient _deviceServiceClient = deviceServiceClient;
+    private readonly IRoutineSchedulerService _schedulerService = schedulerService;
 
     public async Task Execute(IJobExecutionContext context)
     {
@@ -45,9 +48,20 @@ public class RoutineJob(
                 await _mediator.Send(logRoutineExecutionCommand);
 
                 if (!result.IsSuccess)
+                {
                     Console.WriteLine($"Erro ao executar a ação: {result.ErrorMessage}");
+                }
                 else
+                {
                     Console.WriteLine("Ação executada com sucesso.");
+
+                    if (routine.IsOneTime)
+                    {
+                        Console.WriteLine($"A rotina {routine.Id} será excluída após a execução.");
+                        await _schedulerService.DeleteRoutineAsync(routine.Id);
+                        await _mediator.Send(new DeleteRoutineCommand(routine.Id));
+                    }
+                }
             }
         }
     }

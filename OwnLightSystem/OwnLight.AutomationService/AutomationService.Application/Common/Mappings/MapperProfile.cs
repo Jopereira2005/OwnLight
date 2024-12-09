@@ -11,7 +11,8 @@ public class MapperProfile : Profile
 {
     public MapperProfile()
     {
-        CreateMap<CreateRoutineCommand, Routine>();
+        CreateMap<CreateRoutineCommand, Routine>()
+            .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => true));
         CreateMap<UpdateRoutineNameCommand, Routine>();
         CreateMap<UpdateRoutineCommand, Routine>();
         CreateMap<Routine, RoutineResponseDTO>()

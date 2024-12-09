@@ -23,6 +23,15 @@ public class RoutineController(IMediator mediator) : ControllerBase
     }
 
     [Authorize]
+    [HttpPut("switch_status/{Id}")]
+    public async Task<IActionResult> SwitchRoutineStatus(Guid Id)
+    {
+        var command = new SwitchRoutineStatusCommand(Id);
+        await _mediator.Send(command);
+        return Ok("Status da rotina alterado com sucesso.");
+    }
+
+    [Authorize]
     [HttpPut]
     [Route("update/{Id}")]
     public async Task<IActionResult> UpdateRoutine(Guid Id, [FromBody] UpdateRoutineCommand command)
@@ -50,7 +59,7 @@ public class RoutineController(IMediator mediator) : ControllerBase
     [Route("delete/{Id}")]
     public async Task<IActionResult> DeleteRoutine(Guid Id)
     {
-        var command = new DeleteRoutineCommand { Id = Id };
+        var command = new DeleteRoutineCommand(Id);
         await _mediator.Send(command);
         return Ok("Rotina deletada com sucesso.");
     }
