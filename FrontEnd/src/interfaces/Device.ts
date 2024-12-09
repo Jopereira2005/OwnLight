@@ -1,18 +1,8 @@
-import { User } from './User'
-import { Room } from './Room'
-import { Group } from './Group'
-
 export interface Device {
-  id_device?: number,
-  id_user?: number,
-  id_room?: number,
-  id_group?: number,
+  id?: string,
+  roomId?: string,
   name: string,
-  type?: string,
-  state?: boolean,
-  is_dimmable?: boolean,
+  isDimmable?: boolean,
   brightness?: number,
-  user?: User,
-  room?: Room,
-  group?: Group
+  status?: string,
 }

@@ -1,9 +1,5 @@
-import { User } from './User'
-import { Device } from './Device'
-
 export interface Room {
-  id_room?: number,
+  id?: string,
   name: string,
-  devices?: Device[],
-  user?: User
+  userId?: string
 }
