@@ -1,64 +1,76 @@
 import axios from 'axios';
 
-const user_id = localStorage.getItem('user_id');
-const baseURL = "http://localhost:5008/api"
+// Base URLs
+const loginURL = "https://51ce-2804-90-5000-6d2c-8c38-d2b9-6213-5483.ngrok-free.app"; //5008
+const userURL = "https://51ce-2804-90-5000-6d2c-8c38-d2b9-6213-5483.ngrok-free.app"; //5008
+const deviceURL = "https://8198-2804-90-5000-6d2c-8c38-d2b9-6213-5483.ngrok-free.app"; //5034
+const automationURL = "https://eef2-2804-90-5000-6d2c-8c38-d2b9-6213-5483.ngrok-free.app"; //5233
 
-// Criação da instância do Axios
-const api = axios.create({
-  baseURL: baseURL, // Substitua pela URL da sua API
-});
+// Função para criar instâncias de Axios
 
-const forLogin = axios.create({
-  baseURL: baseURL, // Substitua pela URL da sua API
-});
+const createAxiosInstance = (baseURL: string) => {
+  const instance = axios.create({
+    baseURL: `${baseURL}/api`,
+    headers: {
+      "ngrok-skip-browser-warning": "ok"
+    }
+  });
 
-// Interceptor de requisição
-api.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('accessToken'); // Obtém o accessToken do cookie
-    if (token) {
-      if (config.headers) {
+  instance.interceptors.request.use(
+    (config) => {
+      const token = localStorage.getItem('accessToken');
+      if (token && config.headers) {
         config.headers.Authorization = `Bearer ${token}`;
       }
-    }
-    return config;
-  },
-  (error) => Promise.reject(error)
-);
+      return config;
+    },
+    (error: any) => Promise.reject(error)
+  );
 
-let isRefreshing = false;
-let pendingRequests: (() => void)[] = [];
+  let isRefreshing = false;
+  let pendingRequests: (() => void)[] = [];
 
-api.interceptors.response.use(
-  (response) => response,
-  async (error) => {
-    if (error.response?.status === 401) {
-      if (!isRefreshing) {
-        isRefreshing = true;
-        try {
-          const refreshToken = localStorage.getItem('refreshToken');
-          const { data } = await axios.post<{ accessToken: string }>(`${baseURL}/Auth/refresh_token/${user_id}`, { refreshToken });
-          localStorage.setItem('accessToken', data.accessToken);
-          pendingRequests.forEach((cb) => cb());
-          pendingRequests = [];
-        } catch (refreshError) {
-          pendingRequests = [];
-          throw refreshError;
-        } finally {
-          isRefreshing = false;
+  instance.interceptors.response.use(
+    (response) => response,
+    async (error: any) => {
+      if (error.response?.status === 401) {
+        if (!isRefreshing) {
+          isRefreshing = true;
+          try {
+            const refreshToken = localStorage.getItem('refreshToken');
+            const { data } = await axios.post<{ accessToken: string }>(
+              `${userURL}/api/Auth/refresh_token/${localStorage.getItem('user_id')}`,
+              { refreshToken }
+            );
+            localStorage.setItem('accessToken', data.accessToken);
+            pendingRequests.forEach((cb) => cb());
+            pendingRequests = [];
+          } catch (refreshError) {
+            pendingRequests = [];
+            throw refreshError;
+          } finally {
+            isRefreshing = false;
+          }
         }
-      }
 
-      return new Promise((resolve) => {
-        pendingRequests.push(() => {
-          error.config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
-          resolve(axios(error.config));
+        return new Promise((resolve) => {
+          pendingRequests.push(() => {
+            if (error.config.headers) {
+              error.config.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
+            }
+            resolve(axios(error.config));
+          });
         });
-      });
+      }
+      return Promise.reject(error);
     }
-    return Promise.reject(error);
-  }
-);
+  );
 
-export { api };
-export { forLogin };
+  return instance;
+};
+
+// Instâncias para as APIs
+export const forLogin = axios.create({ baseURL: `${loginURL}/api`, headers: { "ngrok-skip-browser-warning": "ok" } });
+export const userAPI = createAxiosInstance(userURL);
+export const deviceAPI = createAxiosInstance(deviceURL);
+export const automationAPI = createAxiosInstance(automationURL);

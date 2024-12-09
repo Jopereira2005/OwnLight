@@ -1,14 +1,7 @@
-import { api } from './server';
-
-interface RegisterData {
-  name:string,
-  username: string,
-  email: string,
-  password: string
-}
+import { userAPI } from './server';
 
 const userService =  {
-  async register({ name, username, email, password }: RegisterData) {
+  async register( name:string, username: string, email: string, password: string ) {
     const data = {
       name: name,
       username: username,
@@ -16,7 +9,7 @@ const userService =  {
       password: password
     }
     try {
-      const response = await api.post('/User/create', data);
+      const response = await userAPI.post('/User/create', data);
       return response;
     } catch (error: any) {
       return error.response.data;
