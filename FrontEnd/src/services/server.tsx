@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 // Base URLs
-const loginURL = "https://51ce-2804-90-5000-6d2c-8c38-d2b9-6213-5483.ngrok-free.app"; //5008
-const userURL = "https://51ce-2804-90-5000-6d2c-8c38-d2b9-6213-5483.ngrok-free.app"; //5008
-const deviceURL = "https://8198-2804-90-5000-6d2c-8c38-d2b9-6213-5483.ngrok-free.app"; //5034
-const automationURL = "https://eef2-2804-90-5000-6d2c-8c38-d2b9-6213-5483.ngrok-free.app"; //5233
+const loginURL = "https://b813-187-72-140-154.ngrok-free.app"; //5008
+const userURL = "https://b813-187-72-140-154.ngrok-free.app"; //5008
+const deviceURL = "https://f4dc-187-72-140-154.ngrok-free.app"; //5034
+const automationURL = "https://9e28-187-72-140-154.ngrok-free.app"; //5233
 
 // Função para criar instâncias de Axios
 

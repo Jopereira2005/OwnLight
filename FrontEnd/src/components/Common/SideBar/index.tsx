@@ -1,7 +1,7 @@
 import styled from './style.module.scss'
 
 import Logo from '../../../assets/Header_Sidebar/logo.svg'
-import { LogoutIcon } from '../../../assets/Header_Sidebar/logout'
+import { LogoutIcon } from '../../../assets/Header_Sidebar/Logout'
 
 import { useEffect } from 'react';
 

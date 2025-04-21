@@ -5,12 +5,13 @@ import styled from './style.module.scss'
 import InputSelect from '../../Common/InputSelect';
 
 import { Room } from '../../../interfaces/Room'
-import { Device } from '../../../interfaces/Device'
+import { Routine } from '../../../interfaces/Routine';
 
 import { TrashIcon } from '../../../assets/Home/Trash'
 
+
 interface EditModalProps {
-  device: Device,
+  routine: Routine,
   rooms: Room[],
   isOpen: boolean,
   toggleEditModal: () => void,
@@ -18,7 +19,7 @@ interface EditModalProps {
   onSubmit: (dados: FormData, id: string) => void,
 }
 
-const EditModal = ({ device, rooms, isOpen, toggleEditModal, deleteRoutineFunc, onSubmit }: EditModalProps) => {
+const EditModal = ({ routine, rooms, isOpen, toggleEditModal, deleteRoutineFunc, onSubmit }: EditModalProps) => {
   useEffect(() => {
     if (isOpen) {
       document.body.classList.add("no_scroll");
@@ -43,22 +44,22 @@ const EditModal = ({ device, rooms, isOpen, toggleEditModal, deleteRoutineFunc, 
   }));
 
   const setDefaultData = () => {
-    setName(device.name ?? '');
-    setRoomId(device.roomId ?? '');
-    setBrightness(device.brightness ?? 100);
+    // setName(routine.name ?? '');
+    // setRoomId(routine.roomId ?? '');
+    // setBrightness(routine.brightness ?? 100);
   }
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    onSubmit(formData, device.id || '');
+    onSubmit(formData, routine.id || '');
     toggleEditModal();
   }
   
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    if (device.id) {
-      deleteRoutineFunc(device.id);
+    if (routine.id) {
+      deleteRoutineFunc(routine.id);
     }
     toggleEditModal();
   }
@@ -83,7 +84,7 @@ const EditModal = ({ device, rooms, isOpen, toggleEditModal, deleteRoutineFunc, 
               /> 
             </div>
 
-            { device.isDimmable &&    
+            {/* { routine.isDimmable &&    
               <div className={ styled.modal__form__container_input__range }>
                 <label htmlFor="brightness" >Brilho: { brightness }</label>
                 <input
@@ -96,7 +97,7 @@ const EditModal = ({ device, rooms, isOpen, toggleEditModal, deleteRoutineFunc, 
                   onChange={(e) => setBrightness(Number(e.target.value))}
                 />
               </div>
-            }
+            } */}
             <div className={ styled.modal__form__container_input__select }>
               <label htmlFor="room">Selecione a Sala:</label>
               <InputSelect 

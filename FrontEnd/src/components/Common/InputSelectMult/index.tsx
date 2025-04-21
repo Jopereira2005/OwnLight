@@ -4,13 +4,14 @@ interface selectProp {
   id: string,
   name: string,
   placeholder?: string,
-  inputValue: { value: string; label: string } | null; // Valor compatível com o `react-select`
-  options: { value: string; label: string }[]; // Array de opções
-  onChangeFunc: (newValue: { value: string; label: string } | null, actionMeta: any) => void,
+  inputValue: { value: string; label: string } | null;
+  options: { value: string; label: string }[];
+  defaultValue: { value: string; label: string }[]; 
+  onChangeFunc: (newValue: import('react-select').MultiValue<{ value: string, label: string }>, actionMeta: import('react-select').ActionMeta<{ value: string, label: string }>) => void,
   required?: boolean | undefined
 }
 
-const InputSelectMult = ({ id, options, name, placeholder, inputValue, onChangeFunc}: selectProp) => {
+const InputSelect = ({ id, options, defaultValue, name, placeholder, inputValue, onChangeFunc}: selectProp) => {
   const inputStyles = {
     control: (provided : any) => ({ ...provided,
       width: "225px",
@@ -39,15 +40,14 @@ const InputSelectMult = ({ id, options, name, placeholder, inputValue, onChangeF
     <Select 
       id={ id }
       name={ name }
-      options={ options } 
+      options={ options }
+      defaultValue={ defaultValue }
       value={ inputValue }
       placeholder={ placeholder } 
       isMulti
-      onChange={ (newValue, actionMeta) => onChangeFunc(newValue as unknown as { value: string; label: string } | null, actionMeta) }
+      onChange={(newValue, actionMeta) => onChangeFunc(newValue, actionMeta)}
       styles={ inputStyles }
       required
-      className="basic-multi-select"
-      classNamePrefix="select"
       theme={(theme : any) => ({
         ...theme,
         borderRadius: 10,
@@ -71,4 +71,4 @@ const InputSelectMult = ({ id, options, name, placeholder, inputValue, onChangeF
   )
 }
 
-export default InputSelectMult
+export default InputSelect

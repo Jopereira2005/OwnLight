@@ -41,7 +41,7 @@ public static class APIServiceRegistration
         {
             options.AddPolicy(
                 "CorsPolicy",
-                builder => builder.WithOrigins(["http://localhost:5173", "https://zibr48bmde.loclx.io"]).AllowAnyMethod().AllowAnyHeader()
+                builder => builder.WithOrigins(["http://localhost:5173", "https://175182603b3b65c752a80f3fc2989178.serveo.net", "http://172.20.10.2"]).AllowAnyMethod().AllowAnyHeader()
             );
         });
         services.AddControllers();
